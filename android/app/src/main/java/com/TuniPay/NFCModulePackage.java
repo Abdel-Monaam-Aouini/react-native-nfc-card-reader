@@ -1,4 +1,4 @@
-package com.merchant;
+package com.TuniPay;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.merchant.NfcModule;
+import com.TuniPay.NfcModule;
 
 public class NFCModulePackage implements ReactPackage {
 

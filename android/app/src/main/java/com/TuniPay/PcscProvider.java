@@ -1,4 +1,4 @@
-package com.merchant;
+package com.TuniPay;
 
 import android.nfc.tech.IsoDep;
 import android.util.Log;

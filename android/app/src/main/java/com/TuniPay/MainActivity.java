@@ -1,4 +1,4 @@
-package com.merchant;
+package com.TuniPay;
 
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
@@ -41,7 +41,7 @@ public class MainActivity extends ReactActivity implements NfcAdapter.ReaderCall
 
   @Override
   protected String getMainComponentName() {
-    return "merchant";
+    return "TuniPay";
   }
 
   @Override

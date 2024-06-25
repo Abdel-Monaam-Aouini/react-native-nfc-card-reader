@@ -1,4 +1,4 @@
-package com.merchant;
+package com.TuniPay;
 
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
