@@ -3,6 +3,7 @@ import {View, Text, TextInput, Button} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../App';
+import NumericKeyboard from '../../components/KeyboardNumber';
 
 type InputScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -13,19 +14,19 @@ const InputScreen = () => {
   const [amount, setAmount] = React.useState('');
   const navigation = useNavigation<InputScreenNavigationProp>();
 
-  // const handleKeyPress = (key: string | number) => {
-  //   if (key === 'CLEAR') {
-  //     setAmount('0.00');
-  //   } else if (key === 'CONFIRM') {
-  //     // Handle confirm action
-  //     console.log('Confirmed amount:', amount);
-  //   } else {
-  //     // Handle number press
-  //     setAmount(prev =>
-  //       prev === '0.00' ? key.toString() : prev + key.toString(),
-  //     );
-  //   }
-  // };
+  const handleKeyPress = (key: string) => {
+    if (key === 'C') {
+      setAmount('0.00');
+    } else if (key === 'CONFIRM') {
+      // Handle confirm action
+      console.log('Confirmed amount:', amount);
+    } else {
+      // Handle number press
+      setAmount(prev =>
+        prev === '0.00' ? key.toString() : prev + key.toString(),
+      );
+    }
+  };
 
   return (
     <View className="flex-1 justify-center items-center bg-white">
@@ -38,7 +39,7 @@ const InputScreen = () => {
         placeholder="Enter amount"
       />
 
-      {/* <KeyboardNumber onPress={handleKeyPress} /> */}
+      <NumericKeyboard onPress={handleKeyPress} />
       <View className="mt-6">
         <Button
           title="Charge"

@@ -1,49 +1,44 @@
-// components/KeyboardNumber.js
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import {styled} from 'nativewind';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-const KeyboardContainer = styled(View);
-const KeyboardRow = styled(View);
-const KeyboardButton = styled(TouchableOpacity);
-const ButtonText = styled(Text);
+const NumericKeyboard = ({onPress}: {onPress: (event: string) => void}) => {
+  const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'C', '0', ','];
 
-const keys = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9],
-  ['CLEAR', 0, 'CONFIRM'],
-];
-
-const KeyboardNumber = ({
-  onPress,
-}: {
-  onPress: (key: string | number) => void;
-}) => {
   return (
-    <KeyboardContainer className="w-full px-4 py-10">
-      {keys.map((row, rowIndex) => (
-        <KeyboardRow
-          key={rowIndex}
-          className="flex flex-row justify-between mb-3">
-          {row.map(key => (
-            <KeyboardButton
-              key={key}
-              className={`flex items-center justify-center w-20 h-20 rounded-xl ${
-                key === 'CLEAR'
-                  ? 'bg-orange-500'
-                  : key === 'CONFIRM'
-                  ? 'bg-green-500'
-                  : 'bg-gray-300'
-              }`}
-              onPress={() => onPress(key)}>
-              <ButtonText className="text-xl text-white">{key}</ButtonText>
-            </KeyboardButton>
-          ))}
-        </KeyboardRow>
+    <View style={styles.container}>
+      {keys.map((key, index) => (
+        <TouchableOpacity
+          key={index}
+          style={styles.key}
+          onPress={() => key && onPress(key)}
+          disabled={!key}>
+          <Text style={styles.keyText}>{key}</Text>
+        </TouchableOpacity>
       ))}
-    </KeyboardContainer>
+    </View>
   );
 };
 
-export default KeyboardNumber;
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: 280,
+    justifyContent: 'center',
+    marginTop: 50,
+  },
+  key: {
+    width: 80,
+    height: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'white',
+  },
+  keyText: {
+    fontSize: 30,
+    color: '#000',
+  },
+});
+
+export default NumericKeyboard;
