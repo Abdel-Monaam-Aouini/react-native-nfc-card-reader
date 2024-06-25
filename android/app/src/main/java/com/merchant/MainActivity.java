@@ -10,9 +10,12 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 
 import com.facebook.react.ReactActivity;
+import com.facebook.react.ReactRootView;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
+
+import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 
 import com.github.devnied.emvnfccard.enums.EmvCardScheme;
 import com.github.devnied.emvnfccard.model.Application;
@@ -43,17 +46,18 @@ public class MainActivity extends ReactActivity implements NfcAdapter.ReaderCall
 
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {
-    return new DefaultReactActivityDelegate(
-        this,
-        getMainComponentName(),
-        DefaultNewArchitectureEntryPoint.getFabricEnabled()
-    );
+    return new ReactActivityDelegate(this, getMainComponentName()) {
+      @Override
+      protected ReactRootView createRootView() {
+        return new RNGestureHandlerEnabledRootView(MainActivity.this);
+      }
+    };
   }
 
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
+      super.onCreate(null);
       mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
   }
 

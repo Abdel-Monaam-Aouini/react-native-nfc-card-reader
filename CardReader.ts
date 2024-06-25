@@ -35,7 +35,7 @@ const isSupported = async () => {
 const readNFC = async () => {
   try {
     const result = await NFCCardReader.readNFC();
-    return result;
+    return JSON.parse(result);
   } catch (error) {
     console.error('Error reading NFC:', error);
     return false;

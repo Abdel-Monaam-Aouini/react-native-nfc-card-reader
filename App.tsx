@@ -1,44 +1,48 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, Button} from 'react-native';
-import {isEnabled, readNFC, isSupported, gotoSettings} from './CardReader';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import HomeScreen from './src/screens/HomeScreen';
+import InputScreen from './src/screens/InputScreen';
+import PaymentScreen from './src/screens/PaymentScreen';
+import PinScreen from './src/screens/PinScreen';
+import ConfirmationScreen from './src/screens/ConfirmationScreen';
+import TapScreen from './src/screens/TapScreen';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
-function App() {
-  const [isNfcEnabled, setIsNfcEnabled] = useState(false);
-  const [isNfcSupported, setIsNfcSupported] = useState(false);
-  const [card, setCard] = useState('');
+export type readNFCType = {
+  typeName: string;
+  aid0: string;
+  aid1: string;
+  cardNumber: string;
+  expireDate: string;
+};
 
-  useEffect(() => {
-    (async () => {
-      const CheckEnabl = await isEnabled();
-      const support = await isSupported();
+export type RootStackParamList = {
+  Home: undefined;
+  Input: undefined;
+  Tap: {amount: string};
+  Payment: {amount: string; data: readNFCType};
+  Pin: {};
+  Confirmation: {};
+};
 
-      setIsNfcEnabled(CheckEnabl);
-      setIsNfcSupported(support);
-    })();
-  }, []);
+const Stack = createStackNavigator<RootStackParamList>();
 
-  async function readNdef() {
-    try {
-      const result = await readNFC();
-      setCard(result);
-    } catch (ex) {
-      console.warn('Oops!', ex);
-    }
-  }
-
+const App = () => {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>NFC is {isNfcSupported ? 'supported' : 'not supported'}</Text>
-      <Text>NFC is {isNfcEnabled ? 'enabled' : 'disabled'}</Text>
-      {isNfcSupported && isNfcEnabled && (
-        <>
-          <Text>{card}</Text>
-          <Button title="Read NFC Card" onPress={readNdef} />
-          <Button title="Go to NFC Settings" onPress={gotoSettings} />
-        </>
-      )}
-    </View>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Input" component={InputScreen} />
+          <Stack.Screen name="Payment" component={PaymentScreen} />
+          <Stack.Screen name="Pin" component={PinScreen} />
+          <Stack.Screen name="Tap" component={TapScreen} />
+          <Stack.Screen name="Confirmation" component={ConfirmationScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
-}
+};
 
 export default App;

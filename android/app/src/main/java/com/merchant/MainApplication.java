@@ -9,6 +9,10 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.merchant.NFCModulePackage;
 
+import com.swmansion.gesturehandler.RNGestureHandlerPackage;
+import com.swmansion.rnscreens.RNScreensPackage;
+import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +28,10 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
-                    new NFCModulePackage()
+                    new NFCModulePackage(),
+                    new RNGestureHandlerPackage(),
+                    new RNScreensPackage(),
+                    new SafeAreaContextPackage()
             );
         }
 
