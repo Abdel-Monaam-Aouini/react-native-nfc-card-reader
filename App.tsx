@@ -33,11 +33,41 @@ const App = () => {
     <GestureHandlerRootView style={{flex: 1}}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Input" component={InputScreen} />
-          <Stack.Screen name="Payment" component={PaymentScreen} />
-          <Stack.Screen name="Pin" component={PinScreen} />
-          <Stack.Screen name="Tap" component={TapScreen} />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              title: '',
+            }}
+          />
+          <Stack.Screen
+            name="Input"
+            component={InputScreen}
+            options={{
+              title: 'Charge',
+            }}
+          />
+          <Stack.Screen
+            name="Payment"
+            component={PaymentScreen}
+            options={{
+              title: 'Confirm Payment',
+            }}
+          />
+          <Stack.Screen
+            name="Pin"
+            component={PinScreen}
+            options={{
+              title: 'Pin',
+            }}
+          />
+          <Stack.Screen
+            name="Tap"
+            component={TapScreen}
+            options={{
+              title: 'Tap To Pay',
+            }}
+          />
           <Stack.Screen name="Confirmation" component={ConfirmationScreen} />
         </Stack.Navigator>
       </NavigationContainer>

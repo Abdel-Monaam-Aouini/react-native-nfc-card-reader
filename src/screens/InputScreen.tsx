@@ -13,6 +13,20 @@ const InputScreen = () => {
   const [amount, setAmount] = React.useState('');
   const navigation = useNavigation<InputScreenNavigationProp>();
 
+  // const handleKeyPress = (key: string | number) => {
+  //   if (key === 'CLEAR') {
+  //     setAmount('0.00');
+  //   } else if (key === 'CONFIRM') {
+  //     // Handle confirm action
+  //     console.log('Confirmed amount:', amount);
+  //   } else {
+  //     // Handle number press
+  //     setAmount(prev =>
+  //       prev === '0.00' ? key.toString() : prev + key.toString(),
+  //     );
+  //   }
+  // };
+
   return (
     <View className="flex-1 justify-center items-center bg-white">
       <Text className="text-6xl mb-8">${amount || '0.00'}</Text>
@@ -23,6 +37,8 @@ const InputScreen = () => {
         onChangeText={setAmount}
         placeholder="Enter amount"
       />
+
+      {/* <KeyboardNumber onPress={handleKeyPress} /> */}
       <View className="mt-6">
         <Button
           title="Charge"
