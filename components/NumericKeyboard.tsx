@@ -1,8 +1,23 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-const NumericKeyboard = ({onPress}: {onPress: (event: string) => void}) => {
-  const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'C', '0', ','];
+const NumericKeyboard = ({
+  setPress,
+}: {
+  setPress: React.Dispatch<React.SetStateAction<string>>;
+}) => {
+  const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'C', '0', ''];
+
+  const handleKeyPress = (key: string) => {
+    if (key === 'C') {
+      setPress('0');
+    } else {
+      // Handle number press
+      setPress((prev: string) =>
+        prev === '0' ? key.toString() : prev + key.toString(),
+      );
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -10,7 +25,7 @@ const NumericKeyboard = ({onPress}: {onPress: (event: string) => void}) => {
         <TouchableOpacity
           key={index}
           style={styles.key}
-          onPress={() => key && onPress(key)}
+          onPress={() => handleKeyPress(key)}
           disabled={!key}>
           <Text style={styles.keyText}>{key}</Text>
         </TouchableOpacity>
@@ -26,6 +41,7 @@ const styles = StyleSheet.create({
     width: 280,
     justifyContent: 'center',
     marginTop: 50,
+    margin: 10,
   },
   key: {
     width: 80,
