@@ -14,8 +14,8 @@ const gotoSettings = async () => {
 
 const isEnabled = async () => {
   try {
-    const isEnabled = await NFCCardReader.isEnabled();
-    return isEnabled;
+    const enabled = await NFCCardReader.isEnabled();
+    return enabled;
   } catch (error) {
     console.error('Error checking NFC availability:', error);
     return false;
@@ -24,8 +24,8 @@ const isEnabled = async () => {
 
 const isSupported = async () => {
   try {
-    const isSupported = await NFCCardReader.isSupported();
-    return isSupported;
+    const supported = await NFCCardReader.isSupported();
+    return supported;
   } catch (error) {
     console.error('Your mobile does not support NFC:', error);
     return false;
