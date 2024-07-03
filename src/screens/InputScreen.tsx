@@ -3,7 +3,7 @@ import {View, Text, TextInput, Button} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../App';
-import NumericKeyboard from '../../components/NumericKeyboard';
+import NumericKeyboard from '../components/NumericKeyboard';
 
 type InputScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
